@@ -1,0 +1,12 @@
+{
+  "name": "mobile-fc",
+  "displayName": "mobile-fc",
+  "expo": {
+    "name": "mobile-fc",
+    "slug": "mobile-fc",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
