@@ -25,7 +25,7 @@ const Stack = createStackNavigator({
   Quiz: {screen: Quiz}
 })
 
-// const App = createAppContainer(Stack);
+// const MyApp = createAppContainer(Stack);
 
 
 export default class App extends Component {
