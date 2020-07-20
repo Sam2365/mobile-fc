@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { createStackNavigator, createAppContainer } from 'react-navigation-stack';
 import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -14,23 +13,29 @@ import Quiz from './components/Quiz';
 
 import reducer from './reducer';
 import { setLocalNotification } from './helper';
+import { createStackNavigator } from '@react-navigation/stack';
 
+const Stack = createStackNavigator();
 
-const Stack = createStackNavigator({
-  Main: { screen: Main },
-  AddDeck: {screen: AddDeck},
-  DeckList: {screen: DeckList},
-  DeckEntry: {screen: DeckEntry},
-  AddCard: {screen: AddCard},
-  Quiz: {screen: Quiz}
-})
-
-// const MyApp = createAppContainer(Stack);
+function MyStack() {
+  return (
+    <Stack.Navigator initialRouteName="Main"
+    screenOptions={{
+      gestureEnabled: true,
+      headerBackTitleVisible: false
+    }}>
+      <Stack.Screen name="Main" component={Main} />
+      <Stack.Screen name="AddDeck" component={AddDeck} />
+      <Stack.Screen name="DeckList" component={DeckList} />
+      <Stack.Screen name="DeckEntry" component={DeckEntry} />
+      <Stack.Screen name="AddCard" component={AddCard} />
+      <Stack.Screen name="Quiz" component={Quiz} />
+    </Stack.Navigator>
+  );
+}
 
 
 export default class App extends Component {
-  
-  App = createAppContainer(Stack)
 
   async componentDidMount(){
     await setLocalNotification()
@@ -41,7 +46,9 @@ export default class App extends Component {
     return (
       <Provider store = {createStore(reducer, applyMiddleware(thunk))}>
         <View style = {{flex: 1}}>
-          <MyApp />
+        <NavigationContainer>
+          <MyStack />
+        </NavigationContainer>
         </View>
       </Provider>
     )
