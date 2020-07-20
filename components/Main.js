@@ -3,6 +3,30 @@ import { Text, View, StyleSheet, TouchableOpacity, Animated, Easing, Dimensions 
 import { connect } from 'react-redux'
 // import {setLocalNotification} from '../notification'
 // import logoImg from '../images/logo.png';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+
+//Bottom tab navigator
+const Tab = createBottomTabNavigator();
+function Tabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Decks" component={DeckList} options={{
+          tabBarLabel: 'Decks',
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="list" size={size} color={color} />
+          ),
+        }}/>
+      <Tab.Screen name="New Deck" component={AddDeck} options={{
+          tabBarLabel: 'New Deck',
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="folder-plus" size={size} color={color} />
+          ),
+        }}/>
+    </Tab.Navigator>
+  );
+}
+
 
 class Main extends Component {
     constructor (props) {
@@ -56,8 +80,9 @@ class Main extends Component {
               <Text style={styles.buttonText}>Create deck</Text>
             </TouchableOpacity>
           </View>
-
+          <Tab/>
         </Animated.View>
+        
       );
     }
   }

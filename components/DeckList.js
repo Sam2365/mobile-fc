@@ -1,9 +1,31 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native'
-import QuizBody from './QuizBody'
+import AddDeck from './AddDeck'
+import { NavigationContainer } from '@react-navigation/native';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
+// //Bottom tab navigator
+// const Tab = createBottomTabNavigator();
+// function Tabs() {
+//   return (
+//     <Tab.Navigator>
+//       <Tab.Screen name="Decks" component={DeckList} options={{
+//           tabBarLabel: 'Decks',
+//           tabBarIcon: ({ color, size }) => (
+//             <Feather name="list" size={size} color={color} />
+//           ),
+//         }}/>
+//       <Tab.Screen name="New Deck" component={AddDeck} options={{
+//           tabBarLabel: 'New Deck',
+//           tabBarIcon: ({ color, size }) => (
+//             <Feather name="folder-plus" size={size} color={color} />
+//           ),
+//         }}/>
+//     </Tab.Navigator>
+//   );
+// }
 
 class DeckList extends Component {
     static navigationOptions = {
@@ -14,23 +36,34 @@ class DeckList extends Component {
         }
     }
     
-    ItemView=({item,props}) => {
-        const data = props.data[item]
-        return(
-        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate(
-                  'Deck Home',
-                  {deck : item}
-                )}>
-            <Text style={[styles.buttonText,{fontSize:19}]}>{item} </Text>
-            <Text style={[styles.buttonText,{fontSize:14}]}>{data['questions'].length} card(s)</Text>
-        </TouchableOpacity>
-        )
-    }
+    // const itemView=({item,props}) => {
+    //     const data = props.data[item]
+    //     return(
+    //     <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate(
+    //               'Deck Home',
+    //               {deck : item}
+    //             )}>
+    //         <Text style={[styles.buttonText,{fontSize:19}]}>{item} </Text>
+    //         <Text style={[styles.buttonText,{fontSize:14}]}>{data['questions'].length} card(s)</Text>
+    //     </TouchableOpacity>
+    //     )
+    // }
 
     renderArray = ({item}) => {
         const { params } = this.props.navigation.state;
         const deck = this.props.data[item]
-        return <ItemView item={item} props={this.props}/>
+        return (item={item} ,props={props}) =>{
+            const data = props.data[item]
+            return(
+            <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate(
+                      'Deck Home',
+                      {deck : item}
+                    )}>
+                <Text style={[styles.buttonText,{fontSize:19}]}>{item} </Text>
+                <Text style={[styles.buttonText,{fontSize:14}]}>{data['questions'].length} card(s)</Text>
+            </TouchableOpacity>
+            )
+        }
     }
     renderSeparator = () => {
         return (

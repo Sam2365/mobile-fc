@@ -15,7 +15,7 @@ class Quiz extends React.Component {
         headerBackTitleStyle: {fontSize: 15,},
     }
 
-    goBakcToFirst=()=>{
+    goBackToFirst=()=>{
         this.list.scrollToIndex({ index: 0 });
     }
     render() {
@@ -38,7 +38,7 @@ class Quiz extends React.Component {
                     {
                         const size = questionArray.length;
                         const index = questionArray.findIndex( i => i['question'] === item['question'] );
-                        return <QuizBody item={item} deck={deck} index={index} size={size} backToFirst={this.goBakcToFirst} />
+                        return <QuizBody item={item} deck={deck} index={index} size={size} backToFirst={this.goBackToFirst} />
                     }
                 }
 
